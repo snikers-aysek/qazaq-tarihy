@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qazaq Tarihy — Қазақстан тарихы (VI–IX ғғ.)</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Header with Kazakh Ornament Accent -->
+  <header class="app-header">
+    <div class="ornament-bar" aria-hidden="true"></div>
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-emblem" aria-hidden="true">❖</div>
+        <div>
+          <h1 class="brand-title">Qazaq Tarihy</h1>
+          <p class="brand-subtitle">Интерактивное изучение истории Казахстана VI–IX вв.</p>
+        </div>
+      </div>
+      <div class="header-progress-box">
+        <span class="progress-label">Прогресс:</span>
+        <div class="progress-bar-container">
+          <div id="global-progress-bar" class="progress-bar-fill" style="width: 0%;"></div>
+        </div>
+        <span id="global-progress-text" class="progress-text">0/4 уроков</span>
+      </div>
+    </div>
+    <!-- Global Navigation -->
+    <nav class="main-nav" aria-label="Основная навигация">
+      <button class="nav-btn active" data-tab="lessons">📖 Уроки</button>
+      <button class="nav-btn" data-tab="timeline">⏳ Лента времени</button>
+      <button class="nav-btn" data-tab="vocab">📚 Словарь</button>
+      <button class="nav-btn" data-tab="review-quiz">🎯 Итоговый тест</button>
+      <button class="nav-btn" data-tab="progress">📊 Прогресс</button>
+    </nav>
+  </header>
+
+  <!-- Main Application Body -->
+  <main class="main-container">
+    <!-- VIEW 1: LESSONS LIST & LESSON DETAIL -->
+    <section id="view-lessons" class="tab-view active">
+      <!-- Lesson selector grid -->
+      <div id="lessons-list-container">
+        <div class="section-intro">
+          <h2>Тарихи сабақтар / Исторические уроки (VI–IX ғғ.)</h2>
+          <p>Выберите тему для интерактивного изучения с параллельным переводом и тестами:</p>
+        </div>
+        <div id="lessons-cards-grid" class="cards-grid">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Single Lesson Container -->
+      <article id="lesson-detail-container" class="hidden">
+        <div class="lesson-top-actions">
+          <button id="btn-back-to-lessons" class="btn btn-secondary">← Ко всем урокам</button>
+          <!-- Bilingual Mode Switcher -->
+          <div class="bilingual-switch-group">
+            <span class="switch-label">Режим текста:</span>
+            <button class="switch-btn active" data-mode="bilingual">Параллельный</button>
+            <button class="switch-btn" data-mode="kk">Тек қазақша</button>
+            <button class="switch-btn" data-mode="ru">Только русский</button>
+          </div>
+        </div>
+
+        <div id="lesson-content-area" class="lesson-content-wrapper">
+          <!-- Dynamically populated -->
+        </div>
+      </article>
+    </section>
+
+    <!-- VIEW 2: INTERACTIVE TIMELINE -->
+    <section id="view-timeline" class="tab-view hidden">
+      <div class="section-intro">
+        <h2>Хронологиялық желі / Интерактивная лента времени</h2>
+        <p>Ключевые события раннесредневековой истории Казахстана (552–766 гг. н.э.):</p>
+        <div class="timeline-filters">
+          <button class="filter-btn active" data-filter="all">Все века</button>
+          <button class="filter-btn" data-filter="6">VI век</button>
+          <button class="filter-btn" data-filter="7">VII век</button>
+          <button class="filter-btn" data-filter="8">VIII век</button>
+        </div>
+      </div>
+      <div id="timeline-events-container" class="timeline-track">
+        <!-- Dynamically populated -->
+      </div>
+    </section>
+
+    <!-- VIEW 3: VOCABULARY EXPLORER -->
+    <section id="view-vocab" class="tab-view hidden">
+      <div class="section-intro">
+        <h2>Тарихи терминдер сөздігі / Словарь исторических терминов</h2>
+        <p>Изучайте ключевую историческую терминологию на казахском языке с пояснениями:</p>
+        <div class="vocab-search-bar">
+          <input type="text" id="vocab-search-input" placeholder="Поиск термина (например: Қаған, Ел, Шад)..." aria-label="Поиск термина">
+        </div>
+      </div>
+      <div id="vocab-cards-grid" class="vocab-grid">
+        <!-- Dynamically populated -->
+      </div>
+    </section>
+
+    <!-- VIEW 4: FINAL REVIEW QUIZ -->
+    <section id="view-review-quiz" class="tab-view hidden">
+      <div class="section-intro">
+        <h2>Қорытынды тест / Итоговое тестирование</h2>
+        <p>Проверьте свои знания по всем 4 темам (VI–IX века). Задания включают проверку дат, личностей и понятий.</p>
+      </div>
+      <div id="review-quiz-container" class="quiz-box">
+        <!-- Dynamically populated -->
+      </div>
+    </section>
+
+    <!-- VIEW 5: PROGRESS & RESET -->
+    <section id="view-progress" class="tab-view hidden">
+      <div class="section-intro">
+        <h2>Оқу нәтижелері / Прогресс обучения</h2>
+        <p>Ваши локальные результаты, сохраненные в браузере (localStorage):</p>
+      </div>
+      <div class="progress-dashboard">
+        <div class="stats-row">
+          <div class="stat-card">
+            <span class="stat-number" id="stat-lessons-count">0/4</span>
+            <span class="stat-caption">Пройдено уроков</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" id="stat-quiz-accuracy">0%</span>
+            <span class="stat-caption">Средний балл тестов</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" id="stat-vocab-count">0</span>
+            <span class="stat-caption">Изучено терминов</span>
+          </div>
+        </div>
+
+        <div class="progress-details-block">
+          <h3>Детализация по темам:</h3>
+          <ul id="progress-lessons-list" class="progress-list">
+            <!-- Dynamically populated -->
+          </ul>
+        </div>
+
+        <div class="reset-zone">
+          <button id="btn-reset-progress" class="btn btn-danger">🗑 Сбросить весь прогресс</button>
+          <p class="reset-help-text">Сброс очистит все сохраненные ответы и результаты тестов на этом устройстве.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Terminology Quick View Modal -->
+  <div id="term-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button id="btn-modal-close" class="modal-close" aria-label="Закрыть">×</button>
+      <div id="modal-content">
+        <!-- Dynamically populated -->
+      </div>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p class="footer-note">Qazaq Tarihy v1.0 MVP — Образовательный проект для изучения истории Казахстана в тюркскую эпоху.</p>
+      <p class="footer-source-note">Исторические факты верифицированы по академическим изданиям Института истории и этнологии им. Ч.Ч. Валиханова.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts in dependency order (No CORS / file:// safe) -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
